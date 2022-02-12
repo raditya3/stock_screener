@@ -45,12 +45,20 @@ def run_threaded(job_func: Callable) -> None:
     job_thread.start()
 
 
-if __name__ == '__main__':
+def main():
     scheduler = SafeScheduler(logger=logger)
     scheduler.every().saturday.at("00:00").do(run_threaded, StockInfoETL.job)
     scheduler.every().saturday.at("03:00").do(run_threaded, StockValuationETL.job)
-    scheduler.every().sunday.at("03:00").do(run_threaded, StockFinancialStatementsETL.job)
+    scheduler.every().sunday.at("03:00").do(
+        run_threaded, StockFinancialStatementsETL.job)
+    StockInfoETL.job()
+    StockValuationETL.job()
+    StockFinancialStatementsETL.job()
     while True:
         logger.debug('Heartbeat 5 seconds')
         scheduler.run_pending()
         time.sleep(5)
+
+
+if __name__ == '__main__':
+    main()

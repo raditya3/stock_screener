@@ -30,7 +30,11 @@ def get_nested(dict_: Dict, *keys: str, default=None) -> Any:
 
 
 def make_yahoo_request(yahoo_ticker: str, params: Dict) -> Dict:
-    response: Dict = requests.get(YAHOO_API_BASE_URL.format(yahoo_ticker), params=params).json()
+    # Spoof yahoo to think its from a mac
+    _response = requests.get(YAHOO_API_BASE_URL.format(yahoo_ticker), params=params, headers={
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.99 Safari/537.36"
+    })
+    response: Dict = _response.json()
     payload: Dict = get_nested(response, 'quoteSummary', 'result')[0]
     return payload
 

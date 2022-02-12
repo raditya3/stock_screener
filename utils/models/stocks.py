@@ -20,35 +20,19 @@ class Stock(Base):
         symbol: str = record.get('symbol', '').replace(' ', '-')
         isin_country: str = record.get('isin', '')[:2]
         currency: str = record.get('currency', '')
-        if isin_country == 'DK':
-            return symbol + '.CO'
-        elif isin_country == 'SE':
-            return symbol + '.ST'
-        elif isin_country == 'FI':
-            return symbol + '.HE'
-        elif isin_country == 'NO':
-            return symbol.replace('o', '') + '.OL'
-        elif currency == 'DKK':
-            return symbol + '.CO'
-        elif currency == 'ISK':
-            return symbol + '.CO'
-        elif currency == 'SEK':
-            return symbol + '.ST'
-        elif currency == 'EUR':
-            return symbol + '.HE'
-        elif currency == 'NOK':
-            return symbol.replace('o', '') + '.OL'
+        if currency == 'INR':
+            return symbol + '.NS'
         else:
             return ''
 
     @classmethod
     def process_response(cls, response: List) -> Base:
         record: Dict[str, str] = {
-            'isin': response[3],
+            'isin': response[4],
             'name': response[0],
-            'symbol': response[1],
-            'currency': response[2],
-            'sector': response[4]
+            'symbol': response[2],
+            'currency': response[3],
+            'sector': response[1]
         }
         record['yahoo_ticker'] = cls.parse_yahoo_ticker_from_isin(record.copy())
         result: Base = cls(**record)

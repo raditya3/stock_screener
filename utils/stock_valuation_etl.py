@@ -12,10 +12,12 @@ def create_database_records() -> List[Base]:
     for ticker_tuple in tickers:
         if len(ticker_tuple) == 2:
             try:
-                response = fetch_yahoo_data(ticker_tuple[1], 'summaryDetail,financialData,price,defaultKeyStatistics')
+                response = fetch_yahoo_data(
+                    ticker_tuple[1], 'summaryDetail,financialData,price,defaultKeyStatistics')
                 record = Price.process_response(response, ticker_tuple[0])
             except Exception:
-                logger.error('Something went wrong getting ticker %s' % ticker_tuple[1])
+                logger.error('Something went wrong getting ticker %s' %
+                             ticker_tuple[1])
                 continue
             data.append(record)
         else:

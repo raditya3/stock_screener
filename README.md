@@ -19,7 +19,7 @@ This stock screener consists of 3 services
 
 * Postgres database
 * Worker service scheduling and executing jobs that fetch the data about the stocks and stores that in the database
-* Web server for serving a front end with a login portal![badge](https://user-images.githubusercontent.com/25644166/153905106-0a8a2f3c-6d6f-448e-b493-7ac4c556962e.svg)
+* Web server for serving a front end with a login portal
 
   * Flask app served by gunicorn
   * Configured for nginx

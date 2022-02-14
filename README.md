@@ -1,13 +1,9 @@
-![Running Python tests](https://github.com/lseffer/stock_screener/workflows/Running%20Python%20tests/badge.svg)
+![Python tests](https://github.com/raditya3/stock_screener/actions/workflows/python-app.yml/badge.svg?event=push)
 
 # Stock screener
-For stocks listed on Nasdaq OMX Nordic.
+For stocks listed in Nifty 500 index.
 
-![](app_screenshot.png?raw=true)
-
-This is a hobby project that helpes me make better investment decisions, while helping me learn new things. I haven't followed any investment strategy to the letter, but the screener helps me find good stocks and weed out the crap.
-
-I'm working on this project very sporadically and the code could be more beautiful but who has time for that?
+This is a hobby project based on [lseffer/stock_screener](https://github.com/lseffer/stock_screener)
 
 __Loosely based on:__
 
@@ -23,7 +19,8 @@ This stock screener consists of 3 services
 
 * Postgres database
 * Worker service scheduling and executing jobs that fetch the data about the stocks and stores that in the database
-* Web server for serving a front end with a login portal
+* Web server for serving a front end with a login portal![badge](https://user-images.githubusercontent.com/25644166/153905106-0a8a2f3c-6d6f-448e-b493-7ac4c556962e.svg)
+
   * Flask app served by gunicorn
   * Configured for nginx
 
@@ -38,4 +35,3 @@ This stock screener consists of 3 services
 * Add more tests
 * Possibly refactor the ETL job scripts
 * Add a job for sending same data to Google Sheets (like in previous version)
-* Ask for feedback
